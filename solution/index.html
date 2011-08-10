@@ -8,10 +8,41 @@
 	<link rel="stylesheet" type="text/css" href="css/carousel.css" media="all" />
 
 	<script type="text/javascript" src="javascripts/jquery-1.6.2.min.js"></script>
-	<script type="text/javascript" src="carousel.js"></script>
+	<script type="text/javascript" src="carousel_2.js"></script>
+	<script type="text/javascript">
+		
+		/*********************************** CONFIGURATION	*/
+		var POST_DATA = [{name: 'NES Images',album_image: 'images/gallery/nes.jpg',images: ['images/gallery/nes-01.jpg','images/gallery/nes-02.jpg','images/gallery/nes-03.jpg','images/gallery/nes-04.jpg','images/gallery/nes-05.jpg','images/gallery/nes-06.jpg','images/gallery/nes-07.jpg','images/gallery/nes-08.jpg','images/gallery/nes-09.jpg','images/gallery/nes-10.jpg','images/gallery/nes-11.jpg','images/gallery/nes-12.jpg','images/gallery/nes-13.jpg','images/gallery/nes-14.jpg','images/gallery/nes-15.png','images/gallery/nes-16.jpg','images/gallery/nes-17.jpg','images/gallery/nes-18.jpg','images/gallery/nes-19.gif']},{name: 'SNES Images',album_image: 'images/gallery/snes.jpg',images: ['images/gallery/snes-01.jpg','images/gallery/snes-02.jpg','images/gallery/snes-03.jpg','images/gallery/snes-04.jpg','images/gallery/snes-05.jpg','images/gallery/snes-06.jpg','images/gallery/snes-07.jpg','images/gallery/snes-08.jpg','images/gallery/snes-09.jpg','images/gallery/snes-10.jpg','images/gallery/snes-11.JPG','images/gallery/snes-12.jpg','images/gallery/snes-13.gif','images/gallery/snes-14.png','images/gallery/snes-15.jpg']},{name: 'N64 Images',album_image: 'images/gallery/n64.jpg',images: ['images/gallery/n64-01.jpg','images/gallery/n64-02.jpg','images/gallery/n64-03.jpg','images/gallery/n64-04.jpg','images/gallery/n64-05.jpg','images/gallery/n64-06.jpg','images/gallery/n64-07.jpg','images/gallery/n64-08.jpg','images/gallery/n64-09.jpg','images/gallery/n64-10.jpg','images/gallery/n64-11.jpg','images/gallery/n64-12.jpg','images/gallery/n64-13.jpg','images/gallery/n64-14.jpg']},{name: 'Game Cube Images',album_image: 'images/gallery/gamecube.jpg',images: ['images/gallery/gc-01.jpg','images/gallery/gc-02.jpg','images/gallery/gc-03.jpg','images/gallery/gc-04.jpg','images/gallery/gc-05.jpg','images/gallery/gc-06.jpg','images/gallery/gc-07.jpg','images/gallery/gc-08.jpg','images/gallery/gc-09.jpg','images/gallery/gc-10.jpg','images/gallery/gc-11.jpg','images/gallery/gc-12.jpg','images/gallery/gc-13.jpg','images/gallery/gc-14.jpg','images/gallery/gc-15.jpg']},{name: 'Wii Images',album_image: 'images/gallery/wii.jpg',images: ['images/gallery/wii-01.jpg','images/gallery/wii-02.jpg','images/gallery/wii-03.jpg','images/gallery/wii-04.jpg','images/gallery/wii-05.jpg','images/gallery/wii-06.jpg','images/gallery/wii-07.jpg','images/gallery/wii-08.jpg','images/gallery/wii-09.jpg']},{name: 'Wii-U Images',album_image: 'images/gallery/wiiu.jpg',images: ['images/gallery/wiiu-01.jpg','images/gallery/wiiu-02.jpg','images/gallery/wiiu-03.jpg','images/gallery/wiiu-04.jpg','images/gallery/wiiu-05.jpg']}];
+		/*********************************** BUILD MARKUP	*/
+		function parse_data_and_build_markup(DATA){
+			var built_gallery = '';
 
+			//parse array using jQuery
+			$.each(DATA, function(index,value){
+				//generate and append markup
+				built_gallery+='<li thumb-index="'+index+'" class="thumb left track-as-link"><div class="thumb-hover" style="display:none;"><p class="title">'+value.name+'</p></div><img src="'+value.album_image+'"></li>';
+			});
+
+			return built_gallery;
+		}
+
+		//wait for dom to complete
+		$(document).ready(function(){
+
+			//I read the hardcoded data yes, but the gallery is built from DOM elements :)
+			$('.thumb-strip').append( parse_data_and_build_markup(POST_DATA) );
+
+			//setup gallery
+			//I ssume all thumbnails are the same size (any size is ok I'm using 100x100)
+			$('#my-gallery').fresh_gallery();
+		});
+
+	</script>
 </head>
 <body>
+<div class="lightbox"></div>
+<div class="lightbox-content"></div>
+
 	<!-- simple markup as a sample webpage -->
 	<div id="wrapper">
 		
@@ -28,21 +59,18 @@
 			<br />
 
 			<div id="tool-tip-holder" style="display:none;">sample tooltip</div>
-			<div class="scroll gallery height-100 ab-center">
-				<div class="gallery-scroll-left left track-as-link">
-					<img src="images/gal-wid-bar_scroll_left_arr.gif" alt="Scroll Left" tool-tip="Scroll Left"/>
-				</div>
-				<div class="left-shade height-100"></div>
-				<div class="gallery-menu left height-100">
+			
+			<div id="my-gallery" class="gallery ab-center">
+				<div class="gallery-scroll scroll-left track-as-link"></div>
+				<div class="left-shade"></div>
+				<div class="gallery-menu">
 					<ul class="thumb-strip">
 						<!-- <div class="gal-1 thumb left track-as-link" tool-tip="Nes Gallery"><img src="images/gallery/nes.jpg"></div>
 						<div class="gal-1 thumb left track-as-link" tool-tip="SNes Gallery"><img src="images/gallery/snes.jpg"></div> -->
 					</ul>
 				</div>
-				<div class="right-shade height-100"></div>
-				<div class="gallery-scroll-right right track-as-link">
-						<img src="images/gal-wid-bar_scroll_right_arr.gif" alt="Scroll Right" tool-tip="Scroll Right"/>
-				</div>
+				<div class="right-shade"></div>
+				<div class="gallery-scroll scroll-right track-as-link"></div>
 			</div>
 			
 			<br />

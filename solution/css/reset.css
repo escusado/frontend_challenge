@@ -20,6 +20,7 @@ line-height:1;
 }
 
 img{
+-ms-interpolation-mode: bicubic;
 line-height:0;
 }
 
