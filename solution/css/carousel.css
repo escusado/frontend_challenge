@@ -66,6 +66,7 @@ h2{
 }
 .thumb-strip{
 	margin-top:9px;
+	margin-left:10px;
 }
 .thumb{
 	margin-right:10px;
@@ -84,6 +85,7 @@ h2{
 	right:40px;
 	width:5px;
 }
+
 /* gallery tooltip exclusive */
 #tool-tip-holder{
 	z-index:1000;
