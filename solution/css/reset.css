@@ -19,6 +19,10 @@ body {
 line-height:1;
 }
 
+img{
+line-height:0;
+}
+
 ol,ul {
 list-style:none;
 }

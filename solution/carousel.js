@@ -1,5 +1,40 @@
+/*
+	Program: Freshout challenge 11/10/08
+	Coder: Joaquin Benitez, Mexico City
+*/
+
+//wait for dom to complete
 $(document).ready(function(){
 
+	//hardcoded data
 	var POST_DATA = [{name: 'NES Images',album_image: 'images/gallery/nes.jpg',images: ['path_to_image/nes-01.jpg','path_to_image/nes-02.jpg','path_to_image/nes-03.jpg','path_to_image/nes-04.jpg','path_to_image/nes-05.jpg','path_to_image/nes-06.jpg','path_to_image/nes-07.jpg','path_to_image/nes-08.jpg','path_to_image/nes-09.jpg','path_to_image/nes-10.jpg','path_to_image/nes-11.jpg','path_to_image/nes-12.jpg','path_to_image/nes-13.jpg','path_to_image/nes-14.jpg','path_to_image/nes-15.png','path_to_image/nes-16.jpg','path_to_image/nes-17.jpg','path_to_image/nes-18.jpg','path_to_image/nes-19.gif']},{name: 'SNES Images',album_image: 'images/gallery/snes.jpg',images: ['path_to_image/snes-01.jpg','path_to_image/snes-02.jpg','path_to_image/snes-03.jpg','path_to_image/snes-04.jpg','path_to_image/snes-05.jpg','path_to_image/snes-06.jpg','path_to_image/snes-07.jpg','path_to_image/snes-08.jpg','path_to_image/snes-09.jpg','path_to_image/snes-10.jpg','path_to_image/snes-11.JPG','path_to_image/snes-12.jpg','path_to_image/snes-13.gif','path_to_image/snes-14.png','path_to_image/snes-15.jpg']},{name: 'N64 Images',album_image: 'images/gallery/n64.jpg',images: ['path_to_image/n64-01.jpg','path_to_image/n64-02.jpg','path_to_image/n64-03.jpg','path_to_image/n64-04.jpg','path_to_image/n64-05.jpg','path_to_image/n64-06.jpg','path_to_image/n64-07.jpg','path_to_image/n64-08.jpg','path_to_image/n64-09.jpg','path_to_image/n64-10.jpg','path_to_image/n64-11.jpg','path_to_image/n64-12.jpg','path_to_image/n64-13.jpg','path_to_image/n64-14.jpg']},{name: 'Game Cube Images',album_image: 'images/gallery/gamecube.jpg',images: ['path_to_image/gc-01.jpg','path_to_image/gc-02.jpg','path_to_image/gc-03.jpg','path_to_image/gc-04.jpg','path_to_image/gc-05.jpg','path_to_image/gc-06.jpg','path_to_image/gc-07.jpg','path_to_image/gc-08.jpg','path_to_image/gc-09.jpg','path_to_image/gc-10.jpg','path_to_image/gc-11.jpg','path_to_image/gc-12.jpg','path_to_image/gc-13.jpg','path_to_image/gc-14.jpg','path_to_image/gc-15.jpg']},{name: 'Wii Images',album_image: 'images/gallery/wii.jpg',images: ['path_to_image/wii-01.jpg','path_to_image/wii-02.jpg','path_to_image/wii-03.jpg','path_to_image/wii-04.jpg','path_to_image/wii-05.jpg','path_to_image/wii-06.jpg','path_to_image/wii-07.jpg','path_to_image/wii-08.jpg','path_to_image/wii-09.jpg']},{name: 'Wii-U Images',album_image: 'images/gallery/wiiu.jpg',images: ['path_to_image/wiiu-01.jpg','path_to_image/wiiu-02.jpg','path_to_image/wiiu-03.jpg','path_to_image/wiiu-04.jpg','path_to_image/wiiu-05.jpg']}];
-	console.log(POST_DATA);
+	
+	//parse array using jQuery
+	$.each(POST_DATA, function(index,value){
+		console.log(value.name);
+	});
+
+	//create "fancy" (not that fancy actually :P)
+
+
+
+	$('[tool-tip]').hover(
+		function(){
+			$('#tool-tip-holder').fadeIn();
+			$('#tool-tip-holder').text($(this).attr('tool-tip'));
+			$(document).bind('mousemove', function(e){
+				$('#tool-tip-holder').css({
+					left:  e.pageX,
+					top:   e.pageY+20
+				});
+			});
+		}
+		,
+		function(){
+			$('#tool-tip-holder').hide();
+			$(document).unbind('mousemove');
+			console.log('off');
+		});
+
 });
+
