@@ -72,6 +72,13 @@ h2{
 	margin-right:10px;
 	border:1px solid #fff;
 	line-height:0;
+	position:relative;
+}
+.thumb-hover{
+	width:80px;
+	height:80px;
+	position:absolute;
+	background:transparent url(../images/gal-wid-display_gallery.png) 5px 5px no-repeat;
 }
 .left-shade{
 	background:transparent url(../images/gal-wid-left_shade.png) 0 0 repeat-y;
@@ -84,6 +91,10 @@ h2{
 	position:absolute;
 	right:40px;
 	width:5px;
+}
+
+.lightbox{
+	
 }
 
 /* gallery tooltip exclusive */
