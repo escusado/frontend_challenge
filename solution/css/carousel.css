@@ -116,6 +116,11 @@ h2{
 	text-align:center;
 }
 
+.image-placeholder{
+	background-color:#111;
+	background:transparent url(../images/gal-wid-loading.gif) 50% 50% no-repeat;
+}
+
 /* lightbox exclusive */
 
 .lightbox{

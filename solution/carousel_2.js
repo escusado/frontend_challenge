@@ -98,6 +98,10 @@
 					$('.lightbox').fadeIn();
 					$(this).css('z-index',$('.lightbox').css('z-index')+1);
 
+					//disable scrollbars
+					$("body").css("overflow", "hidden");
+
+
 					$(this).css('position','absolute');
 					$(this).offset(current_position);
 		},
@@ -106,6 +110,8 @@
 					if( !$('.lightbox').is(":visible") ){
 						$(this).fresh_gallery('go_fullscreen',{index:$(this).attr('thumb-index')});
 					}
+
+					$('<div class="image-placeholder"></div>').insertAfter($('.lightbox'));
 
 					//animate dynamic sizing
 					$(this).animate({top:$(window).height() - $(this).height()},{queue:false,duration:1000});
