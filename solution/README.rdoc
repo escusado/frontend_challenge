@@ -22,5 +22,4 @@ so you can see the first approach on the solution.
 A lot of nice and fancy effects :D
 
 == Issues
-<del>At this version the gallery works on FF, SF, GC, but has an issue with ie9 due to jQuery cross browser issues, I'm looking into it</del>
-ie is now working :D
+ie9 bug is fixed now :D
