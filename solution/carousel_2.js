@@ -25,6 +25,8 @@
 					$(this).find('.gallery-menu').width( $(this).width() - side_controls_size*2 );
 					$(this).find('.thumb-hover')
 
+					$(this).offset( $('.gallery-hole').offset() );
+
 					//set gallery to scroll mode
 					$(this).fresh_gallery('set_scroll_mode',{mode:'scroll'});
 
@@ -135,9 +137,9 @@
 					var current_position = $(this).offset();
 
 					//generate fullscreen placeholder
-					$('<div belongs-to="'+$(this).attr('id')+'" class="gallery-hole ab-center"></div>').insertBefore($(this));
+					/*$('<div belongs-to="'+$(this).attr('id')+'" class="gallery-hole ab-center"></div>').insertBefore($(this));
 					$('[belongs-to="'+$(this).attr('id')+'"]').width($(this).width());
-					$('[belongs-to="'+$(this).attr('id')+'"]').height($(this).height());
+					$('[belongs-to="'+$(this).attr('id')+'"]').height($(this).height());*/
 					
 					$('.lightbox').fadeIn();
 					$(this).css('z-index',$('.lightbox').css('z-index')+2);
@@ -157,7 +159,7 @@
 					}
 
 					//clear previous active gallery
-					$(this).find('.thumb').removeClass('active')
+					$(this).find('.thumb').removeClass('active');
 					//activate gallery
 					$(this).find('[thumb-index="'+options.gallery+'"]').addClass('active');
 
@@ -195,14 +197,11 @@
 		},
 		close_lightbox : function(){
 			$('.lightbox').fadeOut();
+			$(this).find('.thumb').removeClass('active');
 			$('.image-placeholder').fadeOut();
 			$(this).fresh_gallery('set_scroll_mode',{mode:'scroll'});
+			$("body").css("overflow", "auto");
 			$(this).animate({top:$('.gallery-hole').offset().top,left:$('.gallery-hole').offset().left},{queue:false,duration:1000});
-			$('.gallery-hole').fadeOut(1100,function(){
-				$('.gallery').css('position','relative');
-				$('.gallery').css('left','');
-				$('.gallery').css('top','');
-			});
 		}
 	};
 

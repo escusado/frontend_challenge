@@ -57,6 +57,8 @@ h2{
 /* Gallery Speceifics*/
 .gallery-hole{
 	background:#333 url(../images/gal-wid-dummy_background.jpg) 50% 50% no-repeat;
+	width: 550px;
+	height: 100px;
 }
 
 #my-gallery{
@@ -64,9 +66,8 @@ h2{
 }
 
 .gallery{
-	position:relative;
+	position:absolute;
 }
-
 .gallery-scroll{
 	width:50px;
 	height:100%;
