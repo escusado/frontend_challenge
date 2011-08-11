@@ -83,7 +83,7 @@
 					//prepare to go fullscreen
 					var gallery = $(this);
 					$(this).find('.thumb').click(function(){
-						gallery.fresh_gallery('show_image',{index:$(this).attr('thumb-index'),image:0});
+						gallery.fresh_gallery('show_image',{gallery:$(this).attr('thumb-index'),image:0});
 					});
 		},
 		go_fullscreen : function(){
@@ -108,13 +108,35 @@
 		show_image : function(options){
 					//check for fullscreen
 					if( !$('.lightbox').is(":visible") ){
-						$(this).fresh_gallery('go_fullscreen',{index:$(this).attr('thumb-index')});
+						$(this).fresh_gallery('go_fullscreen');
 					}
 
 					$('<div class="image-placeholder"></div>').insertAfter($('.lightbox'));
+					$('.image-placeholder').css('z-index',$(this).css('z-index')+1);
 
 					//animate dynamic sizing
+					var placeholder_width = 0;
+					var placeholder_height = 0;
 					$(this).animate({top:$(window).height() - $(this).height()},{queue:false,duration:1000});
+
+
+					//look for image to load
+					var image_path =  $('[gallery-index="'+options.gallery+'"][image-index="'+options.image+'"]').attr('src');
+
+					var img = new Image();
+
+					$(img).load(function () {
+						$(this).hide();
+						$('.image-placeholder').append(this);
+						placeholder_width = this.width;
+						placeholder_height = this.height;
+						console.log(placeholder_width);
+					}).attr('src', image_path);
+
+					
+
+					$('.image-placeholder').animate({top:$(window).height() - placeholder_height,left:$(window).width() - placeholder_width},{queue:false,duration:1000});
+
 		}
 	};
 

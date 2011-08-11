@@ -117,8 +117,12 @@ h2{
 }
 
 .image-placeholder{
-	background-color:#111;
-	background:transparent url(../images/gal-wid-loading.gif) 50% 50% no-repeat;
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:200px;
+	height:200px;
+	background:#111 url(../images/gal-wid-loading.gif) 50% 50% no-repeat;
 }
 
 /* lightbox exclusive */
