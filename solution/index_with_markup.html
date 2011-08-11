@@ -1,47 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<html lang="en"><head>
+	<meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
 	<title>Freshout Front-end Challenge</title>
 
-	<link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="css/carousel.css" media="all" />
+	<link media="all" href="css/reset.css" type="text/css" rel="stylesheet">
+	<link media="all" href="css/carousel.css" type="text/css" rel="stylesheet">
 
-	<script type="text/javascript" src="javascripts/jquery-1.6.2.min.js"></script>
-	<script type="text/javascript" src="carousel_2.js"></script>
+	<script src="javascripts/jquery-1.6.2.min.js" type="text/javascript"></script>
+	<script src="carousel_2.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		
-		/*********************************** CONFIGURATION	*/
-		var POST_DATA = [{name: 'NES Images',album_image: 'images/gallery/nes.jpg',images: ['images/gallery/nes-01.jpg','images/gallery/nes-02.jpg','images/gallery/nes-03.jpg','images/gallery/nes-04.jpg','images/gallery/nes-05.jpg','images/gallery/nes-06.jpg','images/gallery/nes-07.jpg','images/gallery/nes-08.jpg','images/gallery/nes-09.jpg','images/gallery/nes-10.jpg','images/gallery/nes-11.jpg','images/gallery/nes-12.jpg','images/gallery/nes-13.jpg','images/gallery/nes-14.jpg','images/gallery/nes-15.jpg','images/gallery/nes-16.jpg','images/gallery/nes-17.jpg','images/gallery/nes-18.jpg','images/gallery/nes-19.jpg']},{name: 'SNES Images',album_image: 'images/gallery/snes.jpg',images: ['images/gallery/snes-01.jpg','images/gallery/snes-02.jpg','images/gallery/snes-03.jpg','images/gallery/snes-04.jpg','images/gallery/snes-05.jpg','images/gallery/snes-06.jpg','images/gallery/snes-07.jpg','images/gallery/snes-08.jpg','images/gallery/snes-09.jpg','images/gallery/snes-10.jpg','images/gallery/snes-11.JPG','images/gallery/snes-12.jpg','images/gallery/snes-13.jpg','images/gallery/snes-14.jpg','images/gallery/snes-15.jpg']},{name: 'N64 Images',album_image: 'images/gallery/n64.jpg',images: ['images/gallery/n64-01.jpg','images/gallery/n64-02.jpg','images/gallery/n64-03.jpg','images/gallery/n64-04.jpg','images/gallery/n64-05.jpg','images/gallery/n64-06.jpg','images/gallery/n64-07.jpg','images/gallery/n64-08.jpg','images/gallery/n64-09.jpg','images/gallery/n64-10.jpg','images/gallery/n64-11.jpg','images/gallery/n64-12.jpg','images/gallery/n64-13.jpg','images/gallery/n64-14.jpg']},{name: 'Game Cube Images',album_image: 'images/gallery/gamecube.jpg',images: ['images/gallery/gc-01.jpg','images/gallery/gc-02.jpg','images/gallery/gc-03.jpg','images/gallery/gc-04.jpg','images/gallery/gc-05.jpg','images/gallery/gc-06.jpg','images/gallery/gc-07.jpg','images/gallery/gc-08.jpg','images/gallery/gc-09.jpg','images/gallery/gc-10.jpg','images/gallery/gc-11.jpg','images/gallery/gc-12.jpg','images/gallery/gc-13.jpg','images/gallery/gc-14.jpg','images/gallery/gc-15.jpg']},{name: 'Wii Images',album_image: 'images/gallery/wii.jpg',images: ['images/gallery/wii-01.jpg','images/gallery/wii-02.jpg','images/gallery/wii-03.jpg','images/gallery/wii-04.jpg','images/gallery/wii-05.jpg','images/gallery/wii-06.jpg','images/gallery/wii-07.jpg','images/gallery/wii-08.jpg','images/gallery/wii-09.jpg']},{name: 'Wii-U Images',album_image: 'images/gallery/wiiu.jpg',images: ['images/gallery/wiiu-01.jpg','images/gallery/wiiu-02.jpg','images/gallery/wiiu-03.jpg','images/gallery/wiiu-04.jpg','images/gallery/wiiu-05.jpg']}];
-		
-		/*********************************** BUILD MARKUP	*/
-		function parse_data_and_build_markup(DATA){
-			var built_gallery = '';
-			var built_images = '';
-
-			//parse array using jQuery
-
-			//Galleries
-			$.each(DATA, function(index,value){
-				//generate and append markup
-				built_gallery+='<li thumb-index="'+index+'" class="thumb left track-as-link"><div class="thumb-active"></div><div class="thumb-hover" style="display:none;"></div><p class="thumb-title" style="display:none;">'+value.name+'</p><img src="'+value.album_image+'"></li>';
-				var gallery_index = index
-				$.each(value.images, function(index,value){
-					built_images += '<img gallery-index="'+gallery_index+'" image-index="'+index+'" src="'+value+'"/>';
-				});
-
-			});
-
-			//I read the hardcoded data yes, but the gallery is built from DOM elements :)
-			$('#my-gallery').find('.thumb-strip').append( built_gallery );
-			$('#my-gallery').find('.image-catalog').append ( built_images );
-		}
-
-		//wait for dom to complete & and images lodaded into cache for chrome based browsers
 		$(window).load(function(){
-			//setup gallery
-			parse_data_and_build_markup(POST_DATA);
-
 			//I ssume all thumbnails are the same size (any size is ok I'm using 100x100)
 			$('#my-gallery').fresh_gallery();
 		});
@@ -59,7 +26,7 @@
 	<!-- simple markup as a sample webpage -->
 	<div id="wrapper">
 		
-		<div id="header" class="height-100">
+		<div class="height-100" id="header">
 			<h1>Freshout Front-end Challenge</h1>
 			<h2>Joaquin Benitez Hernandez</h2>
 		</div>
@@ -68,23 +35,23 @@
 			Bacon ipsum dolor sit amet voluptate nostrud flank, et strip steak ball tip tri-tip hamburger. Drumstick pork belly fugiat, nisi short loin tenderloin magna. Veniam beef ribs est, brisket irure ut t-bone in jowl aute pancetta pork ham hock cow. Laborum pork loin short loin in, spare ribs tenderloin in turkey tempor andouille ut shoulder culpa. Salami fatback do laboris, andouille ex tri-tip velit occaecat tail jowl. Adipisicing est chuck, laboris aliquip ribeye tenderloin ea. Drumstick meatloaf biltong deserunt salami, voluptate ball tip culpa nulla flank.
 
 			Ribeye ham consequat, swine boudin magna pork pancetta et hamburger short loin shoulder. Shoulder ex minim consequat. Adipisicing in ball tip jerky cow officia. Tempor consequat short loin veniam, pig dolore drumstick reprehenderit ground round occaecat labore consectetur aute tenderloin. Fatback in t-bone nisi deserunt, pork belly qui flank pork loin chicken sausage cupidatat meatball ham. Venison anim ham hock eiusmod, sunt et nisi ut. Short loin meatloaf commodo qui.
-			<br />
-			<br />
+			<br>
+			<br>
 
-			<div id="tool-tip-holder" style="display:none;">sample tooltip</div>
-			<div class="gallery-hole ab-center" belongs-to="my-gallery"></div>
-			<div id="my-gallery" class="gallery ab-center">
-				<div class="gallery-scroll scroll-left track-as-link"></div>
-				<div class="gallery-menu">
-					<ul class="thumb-strip">
+			<div style="display:none;" id="tool-tip-holder">sample tooltip</div>
+			<div belongs-to="my-gallery" class="gallery-hole ab-center"></div>
+			<div class="gallery ab-center" id="my-gallery" style="height: 100px; top: 201px; left: 436.5px;">
+				<div class="gallery-scroll scroll-left track-as-link" style="background-repeat: no-repeat; background-position: center center; background-image: url(&quot;images/gal-wid-scroll_left.gif&quot;);"></div>
+				<div class="gallery-menu" style="width: 450px;">
+					<ul class="thumb-strip" style="width: 600px; left: -0.15px;">
 						<!-- placeholder for generated markup -->
-					</ul>
+					<li class="thumb left track-as-link" thumb-index="0" style="display: list-item; opacity: 0.5;"><div class="thumb-active"></div><div style="display:none;" class="thumb-hover"></div><p style="display:none;" class="thumb-title">NES Images</p><img src="images/gallery/nes.jpg"></li><li class="thumb left track-as-link" thumb-index="1" style="display: list-item; opacity: 0.5;"><div class="thumb-active"></div><div style="display:none;" class="thumb-hover"></div><p style="display:none;" class="thumb-title">SNES Images</p><img src="images/gallery/snes.jpg"></li><li class="thumb left track-as-link" thumb-index="2" style="display: list-item; opacity: 0.5;"><div class="thumb-active"></div><div style="display:none;" class="thumb-hover"></div><p style="display:none;" class="thumb-title">N64 Images</p><img src="images/gallery/n64.jpg"></li><li class="thumb left track-as-link" thumb-index="3" style="display: list-item; opacity: 0.5;"><div class="thumb-active"></div><div style="display:none;" class="thumb-hover"></div><p style="display:none;" class="thumb-title">Game Cube Images</p><img src="images/gallery/gamecube.jpg"></li><li class="thumb left track-as-link" thumb-index="4" style="display: list-item; opacity: 0.5;"><div class="thumb-active"></div><div style="display: none;" class="thumb-hover"></div><p style="display: none;" class="thumb-title">Wii Images</p><img src="images/gallery/wii.jpg"></li><li class="thumb left track-as-link" thumb-index="5" style="display: list-item; opacity: 0.5;"><div class="thumb-active"></div><div style="display:none;" class="thumb-hover"></div><p style="display:none;" class="thumb-title">Wii-U Images</p><img src="images/gallery/wiiu.jpg"></li></ul>
 				</div>
-				<div class="gallery-scroll scroll-right track-as-link"></div>
-				<div class="image-catalog" style="display:none;"></div>
+				<div class="gallery-scroll scroll-right track-as-link" style="background-repeat: no-repeat; background-position: center center; background-image: url(&quot;images/gal-wid-scroll_right.gif&quot;);"></div>
+				<div style="display:none;" class="image-catalog"><img src="images/gallery/nes-01.jpg" image-index="0" gallery-index="0"><img src="images/gallery/nes-02.jpg" image-index="1" gallery-index="0"><img src="images/gallery/nes-03.jpg" image-index="2" gallery-index="0"><img src="images/gallery/nes-04.jpg" image-index="3" gallery-index="0"><img src="images/gallery/nes-05.jpg" image-index="4" gallery-index="0"><img src="images/gallery/nes-06.jpg" image-index="5" gallery-index="0"><img src="images/gallery/nes-07.jpg" image-index="6" gallery-index="0"><img src="images/gallery/nes-08.jpg" image-index="7" gallery-index="0"><img src="images/gallery/nes-09.jpg" image-index="8" gallery-index="0"><img src="images/gallery/nes-10.jpg" image-index="9" gallery-index="0"><img src="images/gallery/nes-11.jpg" image-index="10" gallery-index="0"><img src="images/gallery/nes-12.jpg" image-index="11" gallery-index="0"><img src="images/gallery/nes-13.jpg" image-index="12" gallery-index="0"><img src="images/gallery/nes-14.jpg" image-index="13" gallery-index="0"><img src="images/gallery/nes-15.jpg" image-index="14" gallery-index="0"><img src="images/gallery/nes-16.jpg" image-index="15" gallery-index="0"><img src="images/gallery/nes-17.jpg" image-index="16" gallery-index="0"><img src="images/gallery/nes-18.jpg" image-index="17" gallery-index="0"><img src="images/gallery/nes-19.jpg" image-index="18" gallery-index="0"><img src="images/gallery/snes-01.jpg" image-index="0" gallery-index="1"><img src="images/gallery/snes-02.jpg" image-index="1" gallery-index="1"><img src="images/gallery/snes-03.jpg" image-index="2" gallery-index="1"><img src="images/gallery/snes-04.jpg" image-index="3" gallery-index="1"><img src="images/gallery/snes-05.jpg" image-index="4" gallery-index="1"><img src="images/gallery/snes-06.jpg" image-index="5" gallery-index="1"><img src="images/gallery/snes-07.jpg" image-index="6" gallery-index="1"><img src="images/gallery/snes-08.jpg" image-index="7" gallery-index="1"><img src="images/gallery/snes-09.jpg" image-index="8" gallery-index="1"><img src="images/gallery/snes-10.jpg" image-index="9" gallery-index="1"><img src="images/gallery/snes-11.JPG" image-index="10" gallery-index="1"><img src="images/gallery/snes-12.jpg" image-index="11" gallery-index="1"><img src="images/gallery/snes-13.jpg" image-index="12" gallery-index="1"><img src="images/gallery/snes-14.jpg" image-index="13" gallery-index="1"><img src="images/gallery/snes-15.jpg" image-index="14" gallery-index="1"><img src="images/gallery/n64-01.jpg" image-index="0" gallery-index="2"><img src="images/gallery/n64-02.jpg" image-index="1" gallery-index="2"><img src="images/gallery/n64-03.jpg" image-index="2" gallery-index="2"><img src="images/gallery/n64-04.jpg" image-index="3" gallery-index="2"><img src="images/gallery/n64-05.jpg" image-index="4" gallery-index="2"><img src="images/gallery/n64-06.jpg" image-index="5" gallery-index="2"><img src="images/gallery/n64-07.jpg" image-index="6" gallery-index="2"><img src="images/gallery/n64-08.jpg" image-index="7" gallery-index="2"><img src="images/gallery/n64-09.jpg" image-index="8" gallery-index="2"><img src="images/gallery/n64-10.jpg" image-index="9" gallery-index="2"><img src="images/gallery/n64-11.jpg" image-index="10" gallery-index="2"><img src="images/gallery/n64-12.jpg" image-index="11" gallery-index="2"><img src="images/gallery/n64-13.jpg" image-index="12" gallery-index="2"><img src="images/gallery/n64-14.jpg" image-index="13" gallery-index="2"><img src="images/gallery/gc-01.jpg" image-index="0" gallery-index="3"><img src="images/gallery/gc-02.jpg" image-index="1" gallery-index="3"><img src="images/gallery/gc-03.jpg" image-index="2" gallery-index="3"><img src="images/gallery/gc-04.jpg" image-index="3" gallery-index="3"><img src="images/gallery/gc-05.jpg" image-index="4" gallery-index="3"><img src="images/gallery/gc-06.jpg" image-index="5" gallery-index="3"><img src="images/gallery/gc-07.jpg" image-index="6" gallery-index="3"><img src="images/gallery/gc-08.jpg" image-index="7" gallery-index="3"><img src="images/gallery/gc-09.jpg" image-index="8" gallery-index="3"><img src="images/gallery/gc-10.jpg" image-index="9" gallery-index="3"><img src="images/gallery/gc-11.jpg" image-index="10" gallery-index="3"><img src="images/gallery/gc-12.jpg" image-index="11" gallery-index="3"><img src="images/gallery/gc-13.jpg" image-index="12" gallery-index="3"><img src="images/gallery/gc-14.jpg" image-index="13" gallery-index="3"><img src="images/gallery/gc-15.jpg" image-index="14" gallery-index="3"><img src="images/gallery/wii-01.jpg" image-index="0" gallery-index="4"><img src="images/gallery/wii-02.jpg" image-index="1" gallery-index="4"><img src="images/gallery/wii-03.jpg" image-index="2" gallery-index="4"><img src="images/gallery/wii-04.jpg" image-index="3" gallery-index="4"><img src="images/gallery/wii-05.jpg" image-index="4" gallery-index="4"><img src="images/gallery/wii-06.jpg" image-index="5" gallery-index="4"><img src="images/gallery/wii-07.jpg" image-index="6" gallery-index="4"><img src="images/gallery/wii-08.jpg" image-index="7" gallery-index="4"><img src="images/gallery/wii-09.jpg" image-index="8" gallery-index="4"><img src="images/gallery/wiiu-01.jpg" image-index="0" gallery-index="5"><img src="images/gallery/wiiu-02.jpg" image-index="1" gallery-index="5"><img src="images/gallery/wiiu-03.jpg" image-index="2" gallery-index="5"><img src="images/gallery/wiiu-04.jpg" image-index="3" gallery-index="5"><img src="images/gallery/wiiu-05.jpg" image-index="4" gallery-index="5"></div>
 			</div>
 			
-			<br />
+			<br>
 			Veniam in ea chicken mollit venison, sint boudin. Boudin sirloin consequat brisket. Cow beef ribs cupidatat ground round, aliquip fugiat turkey eiusmod ut ham hock short loin. Sirloin est et, chuck minim dolore boudin anim deserunt duis tongue swine consectetur mollit. Strip steak voluptate ham hock labore andouille incididunt. Ex venison deserunt salami turkey, short ribs in andouille cupidatat aute. Consectetur beef ball tip drumstick.
 
 			Veniam sausage consectetur, pancetta jerky in quis. Deserunt bresaola ea, excepteur dolor irure drumstick nisi sint tongue et laboris pancetta shoulder. Ground round minim dolor shankle culpa. Boudin non drumstick consequat, veniam esse quis sirloin. Aute hamburger consequat shankle, et qui irure dolore. Sausage ullamco shankle fatback in, tail veniam spare ribs. Pork consequat short loin, andouille pig tail eu biltong cillum excepteur.
@@ -122,11 +89,11 @@
 			Pork chop in short ribs beef ribs turkey duis. Shankle pariatur magna, swine sausage officia commodo reprehenderit sunt eu tempor enim. Brisket bresaola ut, labore dolore t-bone minim aute velit flank esse. Voluptate ball tip et, ad ham hock cow esse eiusmod dolore beef in irure pancetta quis. Ball tip pariatur beef ribs fugiat. Strip steak veniam id, ullamco ad bacon drumstick ut meatball shank chuck adipisicing. Pastrami in rump est.
 		</div>
 
-		<div id="footer" class="height-100">
+		<div class="height-100" id="footer">
 			11/08/10
 		</div>
 
 	</div>
 
-</body>
-</html>
+
+</body></html>
