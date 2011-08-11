@@ -96,7 +96,7 @@
 					$('[belongs-to="'+$(this).attr('id')+'"]').height($(this).height());
 					
 					$('.lightbox').fadeIn();
-					$(this).css('z-index',$('.lightbox').css('z-index')+1);
+					$(this).css('z-index',$('.lightbox').css('z-index')+2);
 
 					//disable scrollbars
 					$("body").css("overflow", "hidden");
@@ -111,31 +111,34 @@
 						$(this).fresh_gallery('go_fullscreen');
 					}
 
-					$('<div class="image-placeholder"></div>').insertAfter($('.lightbox'));
-					$('.image-placeholder').css('z-index',$(this).css('z-index')+1);
+					$('.image-placeholder').show();
+					$('.image-placeholder').css('z-index',$(this).css('z-index')-1);
 
-					//animate dynamic sizing
-					var placeholder_width = 0;
-					var placeholder_height = 0;
 					$(this).animate({top:$(window).height() - $(this).height()},{queue:false,duration:1000});
-
 
 					//look for image to load
 					var image_path =  $('[gallery-index="'+options.gallery+'"][image-index="'+options.image+'"]').attr('src');
+
+					$('.image-placeholder img').remove();
 
 					var img = new Image();
 
 					$(img).load(function () {
 						$(this).hide();
 						$('.image-placeholder').append(this);
-						placeholder_width = this.width;
-						placeholder_height = this.height;
-						console.log(placeholder_width);
+						
+						var placeholder_width = this.width;
+						var placeholder_height = this.height;
+						var placeholder_y = ($(window).height() - placeholder_height)/2;
+						if(placeholder_y<0)placeholder_y=0;
+						var placeholder_x = ($(window).width() - placeholder_width)/2;
+						if(placeholder_x<0)placeholder_x=0;
+
+						$('.image-placeholder').animate({top:placeholder_y,left:placeholder_x,width:placeholder_width,height:placeholder_height},{queue:false,duration:1000});
+
+						$(this).delay(1000).fadeIn();
+
 					}).attr('src', image_path);
-
-					
-
-					$('.image-placeholder').animate({top:$(window).height() - placeholder_height,left:$(window).width() - placeholder_width},{queue:false,duration:1000});
 
 		}
 	};
