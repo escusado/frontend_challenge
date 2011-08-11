@@ -10,7 +10,7 @@ The script is coded as a Plug-In:
 
 *   $('#my-gallery').fresh_gallery();
 
-the implementation is a little bit dirty, I was trying to make it work with multiple galleries in one page (a little complicated) but I decided to go back to the single gallery so there are some traces of this approach.
+There is a lot that can be improved but I think it works nice, I was trying to make it work with multiple galleries in one page (a little complicated) but I decided to go back to the single gallery so there are some traces of this approach.
 
 I left a js file:
 	
