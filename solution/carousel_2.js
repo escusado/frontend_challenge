@@ -64,9 +64,9 @@
 							}
 						);
 					}else{
-						//switch mode
-						/*$(this).find('.scroll-right').unbind('mouseenter mouseleave');
-						$(this).find('.scroll-left').unbind('mouseenter mouseleave');*/
+
+						
+
 
 						//prepare for switching galleries
 						var gallery = $(this);
@@ -104,8 +104,26 @@
 
 					//prepare to go fullscreen
 					var gallery = $(this);
+					
 					$(this).find('.thumb').click(function(){
 						gallery.fresh_gallery('show_image',{gallery:$(this).attr('thumb-index'),image:0});
+					});
+
+					//set image switcher functionality
+					$('.img-right').click(function(){
+						var next_image = parseInt($('#current-image').attr('image-index')) + 1;
+						if( next_image == $('[gallery-index="'+parseInt($('.thumb.active').attr('thumb-index'))+'"]').length){
+							next_image = 0;
+						}
+						gallery.fresh_gallery('show_image',{gallery:$('.thumb.active').attr('thumb-index'),image:next_image}); 
+					});
+
+					$('.img-left').click(function(){
+						var prev_image = parseInt($('#current-image').attr('image-index')) - 1;
+						if( prev_image < 0){
+							prev_image = $('[gallery-index="'+parseInt($('.thumb.active').attr('thumb-index'))+'"]').length - 1;
+						}
+						gallery.fresh_gallery('show_image',{gallery:$('.thumb.active').attr('thumb-index'),image:prev_image});  
 					});
 		},
 		go_fullscreen : function(){
@@ -146,6 +164,7 @@
 
 					//look for image to load
 					var image_path =  $('[gallery-index="'+options.gallery+'"][image-index="'+options.image+'"]').attr('src');
+					var image_index = $('[gallery-index="'+options.gallery+'"][image-index="'+options.image+'"]').attr('image-index');
 
 					$('.image-placeholder img').remove();
 
@@ -161,11 +180,12 @@
 						if(placeholder_y<0)placeholder_y=0;
 						var placeholder_x = ($(window).width() - placeholder_width)/2;
 						if(placeholder_x<0)placeholder_x=0;
-
+						
 						$('.image-placeholder').animate({top:placeholder_y,left:placeholder_x,width:placeholder_width,height:placeholder_height},{queue:false,duration:1000});
-
+						
 						$(this).delay(1000).fadeIn();
-
+						$(this).attr('image-index',image_index);
+						$(this).attr('id','current-image');
 					}).attr('src', image_path);
 
 		}
