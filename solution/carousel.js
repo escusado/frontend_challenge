@@ -1,124 +1,221 @@
 /*Program: Freshout challenge 11/10/08 Coder: Joaquin Benitez, Mexico City*/
 
-/*********************************** CONFIGURATION	*/
-//hardcoded data
-var POST_DATA = [{name: 'NES Images',album_image: 'images/gallery/nes.jpg',images: ['images/gallery/nes-01.jpg','images/gallery/nes-02.jpg','images/gallery/nes-03.jpg','images/gallery/nes-04.jpg','images/gallery/nes-05.jpg','images/gallery/nes-06.jpg','images/gallery/nes-07.jpg','images/gallery/nes-08.jpg','images/gallery/nes-09.jpg','images/gallery/nes-10.jpg','images/gallery/nes-11.jpg','images/gallery/nes-12.jpg','images/gallery/nes-13.jpg','images/gallery/nes-14.jpg','images/gallery/nes-15.png','images/gallery/nes-16.jpg','images/gallery/nes-17.jpg','images/gallery/nes-18.jpg','images/gallery/nes-19.gif']},{name: 'SNES Images',album_image: 'images/gallery/snes.jpg',images: ['images/gallery/snes-01.jpg','images/gallery/snes-02.jpg','images/gallery/snes-03.jpg','images/gallery/snes-04.jpg','images/gallery/snes-05.jpg','images/gallery/snes-06.jpg','images/gallery/snes-07.jpg','images/gallery/snes-08.jpg','images/gallery/snes-09.jpg','images/gallery/snes-10.jpg','images/gallery/snes-11.JPG','images/gallery/snes-12.jpg','images/gallery/snes-13.gif','images/gallery/snes-14.png','images/gallery/snes-15.jpg']},{name: 'N64 Images',album_image: 'images/gallery/n64.jpg',images: ['images/gallery/n64-01.jpg','images/gallery/n64-02.jpg','images/gallery/n64-03.jpg','images/gallery/n64-04.jpg','images/gallery/n64-05.jpg','images/gallery/n64-06.jpg','images/gallery/n64-07.jpg','images/gallery/n64-08.jpg','images/gallery/n64-09.jpg','images/gallery/n64-10.jpg','images/gallery/n64-11.jpg','images/gallery/n64-12.jpg','images/gallery/n64-13.jpg','images/gallery/n64-14.jpg']},{name: 'Game Cube Images',album_image: 'images/gallery/gamecube.jpg',images: ['images/gallery/gc-01.jpg','images/gallery/gc-02.jpg','images/gallery/gc-03.jpg','images/gallery/gc-04.jpg','images/gallery/gc-05.jpg','images/gallery/gc-06.jpg','images/gallery/gc-07.jpg','images/gallery/gc-08.jpg','images/gallery/gc-09.jpg','images/gallery/gc-10.jpg','images/gallery/gc-11.jpg','images/gallery/gc-12.jpg','images/gallery/gc-13.jpg','images/gallery/gc-14.jpg','images/gallery/gc-15.jpg']},{name: 'Wii Images',album_image: 'images/gallery/wii.jpg',images: ['images/gallery/wii-01.jpg','images/gallery/wii-02.jpg','images/gallery/wii-03.jpg','images/gallery/wii-04.jpg','images/gallery/wii-05.jpg','images/gallery/wii-06.jpg','images/gallery/wii-07.jpg','images/gallery/wii-08.jpg','images/gallery/wii-09.jpg']},{name: 'Wii-U Images',album_image: 'images/gallery/wiiu.jpg',images: ['images/gallery/wiiu-01.jpg','images/gallery/wiiu-02.jpg','images/gallery/wiiu-03.jpg','images/gallery/wiiu-04.jpg','images/gallery/wiiu-05.jpg']}];
+//Fresh Gallery
+(function($){
 
-//(100px thumbnail width + margin)
-var thumb_width = 90;
+	var methods = {
+		init :	function() {
+					//gather necesary values
+					var thumb_size = $(this).find('.thumb img').width();
+					//var thumb_size = 100;
+					var number_of_galleries = $(this).find('.thumb-strip').children().length;
+					var side_controls_size = $(this).find('.gallery-scroll').width();
+					
+					//init view
+					$(this).height(thumb_size);
 
-/*********************************** BEHAVIOR		*/
-//wait for dom to complete
-$(document).ready(function(){
+					//animate entry
+					$(this).find('.thumb').hide();
+					$(this).find('.thumb').each(function(){
+						$(this).delay(400 * $(this).attr('thumb-index')).fadeTo('',0.5);
+					});
 
-	//append gallery to strip gallery
-	$('.thumb-strip').append( parse_data_and_build_markup(POST_DATA) );
-	setup_thumb_hover();
+					//adjust view to render correctly
+					$(this).find('.thumb-strip').width( (thumb_size * number_of_galleries) );
+					$(this).find('.gallery-menu').width( $(this).width() - side_controls_size*2 );
+					$(this).find('.thumb-hover')
 
-	//set gallery width properties so it renders correctly
-	$('.thumb-strip').width( ( $('.thumb-strip').children().length * thumb_width ) + 12 ); //12 last margin + 2px border correction
+					$(this).offset( $('.gallery-hole').offset() );
 
-	//scroll functionality
-	//get far left scroll value
-	var left_scroll_value = $('.gallery-menu').width() - $('.thumb-strip').width();
+					//set gallery to scroll mode
+					$(this).fresh_gallery('set_scroll_mode',{mode:'scroll'});
 
-	//initial scroll action for the arrows
-	setup_scroll_controls(left_scroll_value , $('.thumb-strip'));
+					$(this).fresh_gallery('set_thumb_interaction');
+		},
+		set_scroll_mode : function(options){
+					//set view
+					$(this).find('.gallery-scroll').css('background-repeat','no-repeat');
+					$(this).find('.gallery-scroll').css('background-position','center');
+					$(this).find('.scroll-left').css('background-image','url(images/gal-wid-'+options.mode+'_left.gif)');
+					$(this).find('.scroll-right').css('background-image','url(images/gal-wid-'+options.mode+'_right.gif)');
+
+					//set animation controls
+					if(options.mode == 'scroll'){
+						$(this).find('.scroll-left').unbind('click');
+						$(this).find('.scroll-right').unbind('click');
+
+						var animation_args = {queue:false,duration:1000,easing:'linear'};
+						var my_gallery = $(this).find('.thumb-strip');
+
+						var far_left_scroll = $(this).find('.gallery-menu').width() - $(this).find('.thumb-strip').width();
+
+						$(this).find('.scroll-right').hover(
+							function(){
+								my_gallery.animate({left:far_left_scroll},animation_args);
+							}
+							,
+							function(){
+								my_gallery.stop();
+							}
+						);
+
+						$(this).find('.scroll-left').hover(
+							function(){
+								$(my_gallery).animate({left:0},animation_args);
+							}
+							,
+							function(){
+								$(my_gallery).stop();
+							}
+						);
+					}else{
+						//prepare for switching galleries
+						var gallery = $(this);
+
+						$(this).find('.scroll-right').click(function(){
+							var next_gallery = parseInt($('.thumb.active').attr('thumb-index'))+1;
+							if ( next_gallery == $('.thumb').length ){
+								next_gallery = 0;
+							}
+							gallery.fresh_gallery('show_image',{gallery:next_gallery,image:0});
+						});
+
+						$(this).find('.scroll-left').click(function(){
+							var prev_gallery = parseInt($('.thumb.active').attr('thumb-index'))-1;
+							if ( prev_gallery < 0 ){
+								prev_gallery = $('.thumb').length - 1;
+							}
+							gallery.fresh_gallery('show_image',{gallery:prev_gallery,image:0});
+						});
+					}
+		},
+		set_thumb_interaction : function(){
+					$(this).find('.thumb').hover(
+						function(){
+							$(this).fadeTo('',1);
+							$(this).find('.thumb-title').fadeIn();
+							$(this).find('.thumb-hover').fadeIn();
+						},
+						function(){
+							$(this).fadeTo('',0.5);
+							$(this).find('.thumb-title').fadeOut();
+							$(this).find('.thumb-hover').fadeOut();
+						}
+					);
+
+					//prepare to go fullscreen
+					var gallery = $(this);
+					
+					$(this).find('.thumb').click(function(){
+						gallery.fresh_gallery('show_image',{gallery:$(this).attr('thumb-index'),image:0});
+					});
+
+					//set image switcher functionality
+					$('.img-right').click(function(){
+						var next_image = parseInt($('#current-image').attr('image-index')) + 1;
+						if( next_image == $('[gallery-index="'+parseInt($('.thumb.active').attr('thumb-index'))+'"]').length){
+							next_image = 0;
+						}
+						gallery.fresh_gallery('show_image',{gallery:$('.thumb.active').attr('thumb-index'),image:next_image}); 
+					});
+
+					$('.img-left').click(function(){
+						var prev_image = parseInt($('#current-image').attr('image-index')) - 1;
+						if( prev_image < 0){
+							prev_image = $('[gallery-index="'+parseInt($('.thumb.active').attr('thumb-index'))+'"]').length - 1;
+						}
+						gallery.fresh_gallery('show_image',{gallery:$('.thumb.active').attr('thumb-index'),image:prev_image});  
+					});
+
+					//close button functionality
+					$('.close-lightbox').click(function(){
+						gallery.fresh_gallery('close_lightbox');
+					});
+		},
+		go_fullscreen : function(){
+					//prepare to go fullscreen
+					var current_position = $(this).offset();
+
+					//generate fullscreen placeholder
+					/*$('<div belongs-to="'+$(this).attr('id')+'" class="gallery-hole ab-center"></div>').insertBefore($(this));
+					$('[belongs-to="'+$(this).attr('id')+'"]').width($(this).width());
+					$('[belongs-to="'+$(this).attr('id')+'"]').height($(this).height());*/
+					
+					$('.lightbox').fadeIn();
+					$(this).css('z-index',$('.lightbox').css('z-index')+2);
+
+					//disable scrollbars
+					$("body").css("overflow", "hidden");
 
 
-	$('.thumb').click(function(){
-		switch_to_gallery_mode();
-	});
+					$(this).css('position','absolute');
+					$(this).offset(current_position);
+		},
+		show_image : function(options){
+					//check for fullscreen
+					if( !$('.lightbox').is(":visible") ){
+						$(this).fresh_gallery('go_fullscreen');
+						$(this).fresh_gallery('set_scroll_mode',{mode:'switch'});
+					}
 
-	/* NOT THAT FANCY TOOLTIP FUNTIONALITY*/
-	setup_tooltip();
+					//clear previous active gallery
+					$(this).find('.thumb').removeClass('active');
+					//activate gallery
+					$(this).find('[thumb-index="'+options.gallery+'"]').addClass('active');
 
-});
+					$('.image-placeholder').show();
+					$('.image-placeholder').css('z-index',$(this).css('z-index')-1);
 
-function parse_data_and_build_markup(DATA){
-	var built_gallery = '';
+					$(this).animate({top:$(window).height() - $(this).height()},{queue:false,duration:1000});
 
-	//parse array using jQuery
-	$.each(DATA, function(index,value){
-		//generate and append markup
-		built_gallery+='<li class="gal-'+index+' thumb left track-as-link" tool-tip="'+value.name+'"><div class="thumb-hover" style="display:none;"></div><img src="'+value.album_image+'"></li>';
-	});
+					//look for image to load
+					var image_path =  $('[gallery-index="'+options.gallery+'"][image-index="'+options.image+'"]').attr('src');
+					var image_index = $('[gallery-index="'+options.gallery+'"][image-index="'+options.image+'"]').attr('image-index');
 
-	return built_gallery;
-}
+					$('.image-placeholder img').remove();
 
-function setup_thumb_hover(){
-	//set thumb hover behavior
-	$('.thumb').hover(
-		function(){
-			$(this).find('.thumb-hover').fadeIn();
+					var img = new Image();
+
+					$(img).load(function () {
+						$(this).hide();
+						$('.image-placeholder').append(this);
+						
+						var placeholder_width = this.width;
+						var placeholder_height = this.height;
+						var placeholder_y = ($(window).height() - placeholder_height)/2;
+						if(placeholder_y<0)placeholder_y=0;
+						var placeholder_x = ($(window).width() - placeholder_width)/2;
+						if(placeholder_x<0)placeholder_x=0;
+						
+						$('.image-placeholder').animate({top:placeholder_y,left:placeholder_x,width:placeholder_width,height:placeholder_height},{queue:false,duration:1000});
+						
+						$(this).delay(1000).fadeIn();
+						$(this).attr('image-index',image_index);
+						$(this).attr('id','current-image');
+					}).attr('src', image_path);
+
+		},
+		close_lightbox : function(){
+			$('.lightbox').fadeOut();
+			$(this).find('.thumb').removeClass('active');
+			$('.image-placeholder').fadeOut();
+			$(this).fresh_gallery('set_scroll_mode',{mode:'scroll'});
+			$("body").css("overflow", "auto");
+			$(this).animate({top:$('.gallery-hole').offset().top,left:$('.gallery-hole').offset().left},{queue:false,duration:1000});
 		}
-		,
-		function(){
-			$(this).find('.thumb-hover').fadeOut();
-		}
-	);
-}
+	};
 
-function setup_scroll_controls(left_scroll_value, my_gallery){
+	$.fn.fresh_gallery = function( method ) {
 
-	var animation_args = {queue:false,duration:1000,easing:'linear'};
+		// Method calling logic as jQuery basic template
+		if ( methods[method] ) {
+			return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+		} else if ( typeof method === 'object' || ! method ) {
+			return methods.init.apply( this, arguments );
+		} else {
+			$.error( 'Method ' +  method + 'Wrong method' );
+		}    
 
-	$('.gallery-scroll-left img').attr('src','images/gal-wid-bar_scroll_left_arr.gif');
-	$('.gallery-scroll-right img').attr('src','images/gal-wid-bar_scroll_right_arr.gif');
+	};
 
-	$('.gallery-scroll-right').hover(
-		function(){
-			my_gallery.animate({marginLeft:left_scroll_value},animation_args);
-		}
-		,
-		function(){
-			my_gallery.stop();
-		}
-	);
-
-	$('.gallery-scroll-left').hover(
-		function(){
-			$(my_gallery).animate({marginLeft:10},animation_args);
-		}
-		,
-		function(){
-			$(my_gallery).stop();
-		}
-	);
-}
-
-function switch_to_gallery_mode(){
-	show_lightbox();
-}
-
-function show_lightbox(){
-	$('.lightbox').fadeIn();
-	$('.lightbox-content').fadeIn();
-	$('.gallery').appendTo($('.lightbox-content'));
-}
-
-function setup_tooltip(){
-	/* NOT THAT FANCY TOOLTIP FUNTIONALITY*/
-	$('[tool-tip]').hover(
-		//over
-		function(){
-			//$('#tool-tip-holder').fadeIn(); //some display persistance issues :'(
-			$('#tool-tip-holder').show(); //hides and shows correctly
-
-			$('#tool-tip-holder').text($(this).attr('tool-tip'));
-			$(this).bind('mousemove', function(e){
-				$('#tool-tip-holder').css({
-					left:  e.pageX,
-					top:   e.pageY+20
-				});
-			});
-		}
-		,
-		//leave
-		function(){
-			$('#tool-tip-holder').hide();
-			$(this).unbind('mousemove');
-		}
-	);
-}
+})(jQuery);

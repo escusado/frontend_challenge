@@ -13,6 +13,13 @@ The script is coded as a Plug-In:
 
 the implementation is a little bit dirty, I was trying to make it work with multiple galleries in one page (a little complicated) but I decided to go back to the single gallery so there are some traces of this approach.
 
+I left a js file:
+	
+	carousel-old-implementation.js
+
+so you can see the first approach on the solution.
+
 A lot of nice and fancy effects :D
 
-== Issues, at this version the gallery works on FF, SF, GC, but has an issue with ie9 due to jQuery cross browser issues, I'm looking into it
+== Issues
+At this version the gallery works on FF, SF, GC, but has an issue with ie9 due to jQuery cross browser issues, I'm looking into it
