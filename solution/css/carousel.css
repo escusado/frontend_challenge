@@ -154,6 +154,8 @@ h2{
 	top:45%;
 }
 
+
+
 /* lightbox exclusive */
 
 .lightbox{
@@ -168,6 +170,15 @@ h2{
 	-moz-opacity: 0.8;
 	opacity:.80;
 	filter: alpha(opacity=80);
+}
+
+.close-lightbox{
+	position:absolute;
+	right:-12px;
+	top:-12px;
+	width:20px;
+	height:20px;
+	background:transparent url(../images/gal-wid-close_gall_icon.gif) 0 0 no-repeat;
 }
 
 /* gallery tooltip exclusive */

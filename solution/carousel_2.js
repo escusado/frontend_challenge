@@ -39,6 +39,9 @@
 
 					//set animation controls
 					if(options.mode == 'scroll'){
+						$(this).find('.scroll-left').unbind('click');
+						$(this).find('.scroll-right').unbind('click');
+
 						var animation_args = {queue:false,duration:1000,easing:'linear'};
 						var my_gallery = $(this).find('.thumb-strip');
 
@@ -64,10 +67,6 @@
 							}
 						);
 					}else{
-
-						
-
-
 						//prepare for switching galleries
 						var gallery = $(this);
 
@@ -124,6 +123,11 @@
 							prev_image = $('[gallery-index="'+parseInt($('.thumb.active').attr('thumb-index'))+'"]').length - 1;
 						}
 						gallery.fresh_gallery('show_image',{gallery:$('.thumb.active').attr('thumb-index'),image:prev_image});  
+					});
+
+					//close button functionality
+					$('.close-lightbox').click(function(){
+						gallery.fresh_gallery('close_lightbox');
 					});
 		},
 		go_fullscreen : function(){
@@ -188,6 +192,17 @@
 						$(this).attr('id','current-image');
 					}).attr('src', image_path);
 
+		},
+		close_lightbox : function(){
+			$('.lightbox').fadeOut();
+			$('.image-placeholder').fadeOut();
+			$(this).fresh_gallery('set_scroll_mode',{mode:'scroll'});
+			$(this).animate({top:$('.gallery-hole').offset().top,left:$('.gallery-hole').offset().left},{queue:false,duration:1000});
+			$('.gallery-hole').fadeOut(1100,function(){
+				$('.gallery').css('position','relative');
+				$('.gallery').css('left','');
+				$('.gallery').css('top','');
+			});
 		}
 	};
 
