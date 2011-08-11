@@ -1,0 +1,18 @@
+== The album carousel widget solution
+
+The solutuion has been implemented as requested.
+
+There are 2 index files:
+	index_hardcoded.html - this one has the input data harcoded into the js, BUT the JS script parses it and converts it to HTML markup, this has an issue, the first time the file is loaded the JS that parses it comes a little late and breaks the gallery so a refresh is needed.
+
+	index_with_markup.html - this one is the file that has the parsed input data already converted so no reload needed.
+
+The script is coded as a Plug-In:
+
+	$('#my-gallery').fresh_gallery();
+
+the implementation is a little bit dirty, I was trying to make it work with multiple galleries in one page (a little complicated) but I decided to go back to the single gallery so there are some traces of this approach.
+
+A lot of nice and fancy effects :D
+
+== Issues, at this version the gallery works on FF, SF, GC, but has an issue with ie9 due to jQuery cross browser issues, I'm looking into it
