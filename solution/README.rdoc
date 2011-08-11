@@ -1,11 +1,11 @@
-== The album carousel widget solution
+=== The album carousel widget solution
 
 The solutuion has been implemented as requested.
 
 There are 2 index files:
 	index_hardcoded.html - this one has the input data harcoded into the js, BUT the JS script parses it and converts it to HTML markup, this has an issue, the first time the file is loaded the JS that parses it comes a little late and breaks the gallery so a refresh is needed.
 
-	index_with_markup.html - this one is the file that has the parsed input data already converted so no reload needed.
+	index_with_markup.html - this one is the file that has the parsed input data already so all code comes from HTML so no reload needed.
 
 The script is coded as a Plug-In:
 
@@ -22,4 +22,5 @@ so you can see the first approach on the solution.
 A lot of nice and fancy effects :D
 
 == Issues
-At this version the gallery works on FF, SF, GC, but has an issue with ie9 due to jQuery cross browser issues, I'm looking into it
+<del>At this version the gallery works on FF, SF, GC, but has an issue with ie9 due to jQuery cross browser issues, I'm looking into it</del>
+ie is now working :D

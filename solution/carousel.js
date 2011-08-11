@@ -25,7 +25,15 @@
 					$(this).find('.gallery-menu').width( $(this).width() - side_controls_size*2 );
 					$(this).find('.thumb-hover')
 
-					$(this).offset( $('.gallery-hole').offset() );
+					
+					var g_top = $('.gallery-hole').offset().top;
+					var g_left = $('.gallery-hole').offset().left;
+
+					//$(this).offset( $('.gallery-hole').offset() );
+					//changed to work with ie and all others
+					$(this).css('top',g_top+'px');
+					$(this).css('left',g_left+'px');
+					
 
 					//set gallery to scroll mode
 					$(this).fresh_gallery('set_scroll_mode',{mode:'scroll'});
