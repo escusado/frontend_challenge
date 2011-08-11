@@ -24,7 +24,7 @@
 			//Galleries
 			$.each(DATA, function(index,value){
 				//generate and append markup
-				built_gallery+='<li thumb-index="'+index+'" class="thumb left track-as-link"><div class="thumb-hover" style="display:none;"></div><p class="thumb-title" style="display:none;">'+value.name+'</p><img src="'+value.album_image+'"></li>';
+				built_gallery+='<li thumb-index="'+index+'" class="thumb left track-as-link"><div class="thumb-active"></div><div class="thumb-hover" style="display:none;"></div><p class="thumb-title" style="display:none;">'+value.name+'</p><img src="'+value.album_image+'"></li>';
 				var gallery_index = index
 				$.each(value.images, function(index,value){
 					built_images += '<img gallery-index="'+gallery_index+'" image-index="'+index+'" src="'+value+'"/>';

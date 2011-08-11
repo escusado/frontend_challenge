@@ -122,6 +122,18 @@ h2{
 	background:#111 url(../images/gal-wid-loading.gif) 50% 50% no-repeat;
 }
 
+.thumb-active{
+	display:none;
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:transparent url(../images/gal-wid-active.gif) 50% 50% no-repeat;
+}
+
+.active .thumb-active{
+	display:block;
+}
+
 /* lightbox exclusive */
 
 .lightbox{

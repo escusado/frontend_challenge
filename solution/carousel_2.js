@@ -17,7 +17,7 @@
 					//animate entry
 					$(this).find('.thumb').hide();
 					$(this).find('.thumb').each(function(){
-						$(this).delay(200 * $(this).attr('thumb-index')).fadeTo('',0.5);
+						$(this).delay(400 * $(this).attr('thumb-index')).fadeTo('',0.5);
 					});
 
 					//adjust view to render correctly
@@ -38,7 +38,7 @@
 					$(this).find('.scroll-right').css('background-image','url(images/gal-wid-'+options.mode+'_right.gif)');
 
 					//set animation controls
-					if(options.mode = 'scroll'){
+					if(options.mode == 'scroll'){
 						var animation_args = {queue:false,duration:1000,easing:'linear'};
 						var my_gallery = $(this).find('.thumb-strip');
 
@@ -54,7 +54,7 @@
 							}
 						);
 
-						$('.scroll-left').hover(
+						$(this).find('.scroll-left').hover(
 							function(){
 								$(my_gallery).animate({left:0},animation_args);
 							}
@@ -64,14 +64,36 @@
 							}
 						);
 					}else{
-						//switch gallery
+						//switch mode
+						/*$(this).find('.scroll-right').unbind('mouseenter mouseleave');
+						$(this).find('.scroll-left').unbind('mouseenter mouseleave');*/
+
+						//prepare for switching galleries
+						var gallery = $(this);
+
+						$(this).find('.scroll-right').click(function(){
+							var next_gallery = parseInt($('.thumb.active').attr('thumb-index'))+1;
+							if ( next_gallery == $('.thumb').length ){
+								next_gallery = 0;
+							}
+							gallery.fresh_gallery('show_image',{gallery:next_gallery,image:0});
+						});
+
+						$(this).find('.scroll-left').click(function(){
+							var prev_gallery = parseInt($('.thumb.active').attr('thumb-index'))-1;
+							if ( prev_gallery < 0 ){
+								prev_gallery = $('.thumb').length - 1;
+							}
+							gallery.fresh_gallery('show_image',{gallery:prev_gallery,image:0});
+						});
 					}
 		},
 		set_thumb_interaction : function(){
 					$(this).find('.thumb').hover(
 						function(){
 							$(this).fadeTo('',1);
-							$(this).children().fadeIn();
+							$(this).find('.thumb-title').fadeIn();
+							$(this).find('.thumb-hover').fadeIn();
 						},
 						function(){
 							$(this).fadeTo('',0.5);
@@ -109,7 +131,13 @@
 					//check for fullscreen
 					if( !$('.lightbox').is(":visible") ){
 						$(this).fresh_gallery('go_fullscreen');
+						$(this).fresh_gallery('set_scroll_mode',{mode:'switch'});
 					}
+
+					//clear previous active gallery
+					$(this).find('.thumb').removeClass('active')
+					//activate gallery
+					$(this).find('[thumb-index="'+options.gallery+'"]').addClass('active');
 
 					$('.image-placeholder').show();
 					$('.image-placeholder').css('z-index',$(this).css('z-index')-1);
