@@ -18,16 +18,23 @@
 			var built_gallery = '';
 
 			//parse array using jQuery
+
+			//Galleries
 			$.each(DATA, function(index,value){
 				//generate and append markup
-				built_gallery+='<li thumb-index="'+index+'" class="thumb left track-as-link"><div class="thumb-hover" style="display:none;"><p class="title">'+value.name+'</p></div><img src="'+value.album_image+'"></li>';
+				built_gallery+='<li thumb-index="'+index+'" class="thumb left track-as-link"><div class="thumb-hover" style="display:none;"></div><p class="thumb-title" style="display:none;">'+value.name+'</p><img src="'+value.album_image+'"></li>';
+
+
+
 			});
+
+
 
 			return built_gallery;
 		}
 
-		//wait for dom to complete
-		$(document).ready(function(){
+		//wait for dom to complete & and images lodaded into cache for chrome based browsers
+		$(window).load(function(){
 
 			//I read the hardcoded data yes, but the gallery is built from DOM elements :)
 			$('.thumb-strip').append( parse_data_and_build_markup(POST_DATA) );
@@ -41,7 +48,6 @@
 </head>
 <body>
 <div class="lightbox"></div>
-<div class="lightbox-content"></div>
 
 	<!-- simple markup as a sample webpage -->
 	<div id="wrapper">
@@ -62,14 +68,11 @@
 			
 			<div id="my-gallery" class="gallery ab-center">
 				<div class="gallery-scroll scroll-left track-as-link"></div>
-				<div class="left-shade"></div>
 				<div class="gallery-menu">
 					<ul class="thumb-strip">
-						<!-- <div class="gal-1 thumb left track-as-link" tool-tip="Nes Gallery"><img src="images/gallery/nes.jpg"></div>
-						<div class="gal-1 thumb left track-as-link" tool-tip="SNes Gallery"><img src="images/gallery/snes.jpg"></div> -->
+						<!-- placeholder for generated markup -->
 					</ul>
 				</div>
-				<div class="right-shade"></div>
 				<div class="gallery-scroll scroll-right track-as-link"></div>
 			</div>
 			
